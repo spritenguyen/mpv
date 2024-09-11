@@ -11,3 +11,8 @@ scripts=: Đây là tùy chọn để chỉ định các tập lệnh Lua.
 /storage/emulated/0/documents/script2.lua: Đường dẫn đến tập lệnh Lua thứ hai.
 Các tập lệnh Lua này sẽ được MPV tải và thực thi theo thứ tự được liệt kê. Điều này cho phép bạn tùy chỉnh và mở rộng chức năng của MPV bằng cách sử dụng các tập lệnh Lua.
 ============================================================================================================================
+ Đây là ví dụ về cách sử dụng tập lệnh js để chạy trên thiết bị Android VR. Tập lệnh lua cũng có thể được chạy bằng cách sử dụng cấu hình tương tự.
+
+script="/storage/emulated/0/Android/media/is.xyz.mpv/scripts/mpv-easy-es5.js"
+
+osd-fonts-dir="/storage/emulated/0/Android/media/is.xyz.mpv/fonts 
