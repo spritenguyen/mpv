@@ -5,7 +5,7 @@ Tôi sử dụng cái này trong mpv.conf để tải tập lệnh
 scripts=/storage/emulated/0/documents/script.lua:/storage/emulated/0/documents/script2.lua 
 !giải thích
 Dòng lệnh này trong tệp mpv.conf có ý nghĩa là chỉ định các tập lệnh Lua mà MPV sẽ tải và thực thi khi khởi động. Cụ thể:
-
+HIỆN DÙNG LỆNH NÀY MỚI : script=/storage/emulated/0/Android/media/is.xyz.mpv/scripts/skipsilence.lua
 scripts=: Đây là tùy chọn để chỉ định các tập lệnh Lua.
 /storage/emulated/0/documents/script.lua: Đường dẫn đến tập lệnh Lua đầu tiên.
 /storage/emulated/0/documents/script2.lua: Đường dẫn đến tập lệnh Lua thứ hai.
