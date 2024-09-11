@@ -3,4 +3,11 @@ Có thể tự động phát tệp tiếp theo bằng một tập lệnh. Nếu 
 
 Tôi sử dụng cái này trong mpv.conf để tải tập lệnh
 scripts=/storage/emulated/0/documents/script.lua:/storage/emulated/0/documents/script2.lua 
+!giải thích
+Dòng lệnh này trong tệp mpv.conf có ý nghĩa là chỉ định các tập lệnh Lua mà MPV sẽ tải và thực thi khi khởi động. Cụ thể:
+
+scripts=: Đây là tùy chọn để chỉ định các tập lệnh Lua.
+/storage/emulated/0/documents/script.lua: Đường dẫn đến tập lệnh Lua đầu tiên.
+/storage/emulated/0/documents/script2.lua: Đường dẫn đến tập lệnh Lua thứ hai.
+Các tập lệnh Lua này sẽ được MPV tải và thực thi theo thứ tự được liệt kê. Điều này cho phép bạn tùy chỉnh và mở rộng chức năng của MPV bằng cách sử dụng các tập lệnh Lua.
 ============================================================================================================================
