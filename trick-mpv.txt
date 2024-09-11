@@ -1,0 +1,6 @@
+!chạy một tập lệnh .lua trong mpv android.
+Có thể tự động phát tệp tiếp theo bằng một tập lệnh. Nếu bạn đã có một cái hoạt động trên máy tính, bạn có thể chỉ cần sao chép nó vào thiết bị Android.
+
+Tôi sử dụng cái này trong mpv.conf để tải tập lệnh
+scripts=/storage/emulated/0/documents/script.lua:/storage/emulated/0/documents/script2.lua 
+============================================================================================================================
