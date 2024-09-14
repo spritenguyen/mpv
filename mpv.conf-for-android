@@ -1,6 +1,6 @@
 script=/storage/emulated/0/Android/media/is.xyz.mpv/scripts/autoload.lua
 # Sử dụng GPU để xử lý video
-vo=gpu
+!vo=gpu
 hwdec=auto
 
 # Tăng chất lượng âm thanh
