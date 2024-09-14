@@ -1,1 +1,13 @@
-scripts=/storage/emulated/0/documents/script.lua:/storage/emulated/0/documents/script2.lua 
+script=/storage/emulated/0/Android/media/is.xyz.mpv/scripts/autoload.lua
+# Sử dụng GPU để xử lý video
+vo=gpu
+hwdec=auto
+
+# Tăng chất lượng âm thanh
+audio-samplerate=96000
+audio-channels=stereo
+audio-normalize-downmix=yes
+
+# Tăng cường hiệu suất
+cache=yes
+cache-secs=10
