@@ -1,3 +1,15 @@
+!tao tep lrc tuy chinh
+if filename == "song1.lrc" or filename == "song2.lrc" or filename == "song3.lrc" then
+    mp.set_property("sub-pos", "90")
+end
+
+local filename = mp.get_property("filename")
+if filename == "song1.lrc" or filename == "song2.lrc" then
+    mp.set_property("sub-pos", "90")
+end
+giá trị hợp lý sẽ là 90 -> 50
+
+==============================================================================================================================
 !chạy một tập lệnh .lua trong mpv android.
 Có thể tự động phát tệp tiếp theo bằng một tập lệnh. Nếu bạn đã có một cái hoạt động trên máy tính, bạn có thể chỉ cần sao chép nó vào thiết bị Android.
 
