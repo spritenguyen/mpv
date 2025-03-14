@@ -1,0 +1,54 @@
+# Kích hoạt script autoload cho phụ đề tự động
+script=/storage/emulated/0/Android/media/is.xyz.mpv/scripts/autoload.lua
+
+# Tùy chọn dành cho youtube-dl (hoặc yt-dlp) để tải nhanh
+ytdl-raw-options=external-downloader-args=["-x", "16", "-s", "16", "-k", "1M"]
+
+# Tùy chỉnh phụ đề
+sub-font-size=68
+#sub-font="Droid Sans"  # Hoặc thay bằng font yêu thích trên máy tính
+sub-color="#FFFFFF"  # Màu chữ trắng
+sub-shadow-color="#000000"  # Màu viền đen
+sub-shadow-offset=2
+sub-border-size=2
+
+# Cấu hình cache cho phát trực tuyến
+cache=yes
+cache-secs=120
+demuxer-max-bytes=2GiB  # Tăng lên 2GB tận dụng RAM cao hơn
+demuxer-max-back-bytes=200MiB
+
+# Renderer GPU
+vo=gpu-next
+gpu-api=opengl  # Đề xuất OpenGL vì hiệu quả hơn Vulkan trên GPU Vega tích hợp
+hwdec=auto-safe  # Tự động bật giải mã phần cứng an toàn
+hwdec-interop=auto
+
+# Xử lý HDR
+tone-mapping=hable
+hdr-compute-peak=yes
+gamut-clipping=yes
+target-prim=bt2020
+target-contrast=1.0  # Điều chỉnh contrast tự nhiên hơn
+
+# Tùy chỉnh scaling
+scale=ewa_lanczos
+scale-antiring=0.8  # Tăng giá trị antiring một chút cho hình ảnh mịn hơn
+dscale=mitchell  # Tùy chọn giảm nhiễu nhẹ khi scaling xuống
+
+# Giới hạn tài nguyên để cải thiện hiệu suất
+swapchain-depth=2
+gpu-max-frames=2
+
+# Xử lý video có FPS thấp
+interpolation=yes
+tscale=catmull_rom  # Mượt hơn với phương pháp Catmull-Rom
+
+# Bật dithering (nếu cần)
+temporal-dither=no
+dither-depth=8
+
+# Tối ưu âm thanh
+audio-samplerate=48000  # Giữ nguyên tần số tiêu chuẩn
+audio-channels=stereo
+audio-normalize-downmix=yes
