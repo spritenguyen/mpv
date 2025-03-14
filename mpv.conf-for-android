@@ -1,13 +1,58 @@
+# Kích hoạt script autoload cho phụ đề tự động
 script=/storage/emulated/0/Android/media/is.xyz.mpv/scripts/autoload.lua
-# Sử dụng GPU để xử lý video
-!vo=gpu
-hwdec=auto
 
-# Tăng chất lượng âm thanh
+# Tùy chọn dành cho youtube-dl (hoặc yt-dlp) để tải nhanh
+ytdl-raw-options=external-downloader-args=["-x", "16", "-s", "16", "-k", "1M"]
+
+# Tùy chỉnh phụ đề
+sub-font-size=68
+sub-font="Droid Sans"  # Hoặc bất kỳ font nào bạn đã cài đặt
+sub-color="#FFFFFF"  # Màu chữ trắng
+sub-shadow-color="#000000"  # Màu viền đen để tăng độ rõ ràng
+sub-shadow-offset=2  # Độ dày của viền chữ
+sub-border-size=2
+
+# Cấu hình cache cho phát trực tuyến
+cache=yes
+cache-secs=120
+demuxer-max-bytes=1GiB
+demuxer-max-back-bytes=100MiB
+
+# Renderer GPU với Vulkan API để tận dụng Snapdragon 778G
+gpu-api=vulkan
+vo=gpu-next
+
+# Giải mã phần cứng
+hwdec=mediacodec
+hwdec-interop=auto
+
+# Xử lý HDR tốt hơn
+tone-mapping=hable
+hdr-compute-peak=yes
+gamut-clipping=yes
+target-prim=bt2020
+target-contrast=0.9
+hdr-contrast-recovery=0.85
+
+# Tùy chỉnh scaling để cân bằng hiệu suất và chất lượng
+scale=ewa_lanczos
+scale-antiring=0.6
+dscale=linear
+
+# Giới hạn tài nguyên để duy trì nhiệt độ ổn định và giảm tải
+swapchain-depth=3
+gpu-max-frames=3
+
+# Xử lý video với FPS thấp để phát mượt mà hơn
+interpolation=yes
+tscale=linear
+
+# Bật dithering (nếu cần) để cải thiện màu sắc
+temporal-dither=no
+dither-depth=8
+
+# Tối ưu âm thanh
 audio-samplerate=96000
 audio-channels=stereo
 audio-normalize-downmix=yes
-
-# Tăng cường hiệu suất
-cache=yes
-cache-secs=10
+audio-output-channels=2
