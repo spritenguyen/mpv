@@ -1,54 +1,70 @@
-# Kích hoạt script autoload cho phụ đề tự động
-script=/storage/emulated/0/Android/media/is.xyz.mpv/scripts/autoload.lua
+# Tắt thanh trạng thái và viền cửa sổ
+osd-bar=no
+border=no
+geometry=36%
 
-# Tùy chọn dành cho youtube-dl (hoặc yt-dlp) để tải nhanh
-ytdl-raw-options=external-downloader-args=["-x", "16", "-s", "16", "-k", "1M"]
+# Tắt màn hình sau 60 giây khi không hoạt động
+idle-timeout=60
+
+# Sử dụng GPU để xử lý video
+vo=gpu-next
+gpu-api=opengl  # GPU tích hợp Radeon Vega hoạt động tốt hơn với OpenGL
+hwdec=auto
+hwdec-interop=auto
+keep-open=yes  # Giữ cửa sổ MPV sau khi video kết thúc
+
+# Tăng cường chất lượng âm thanh
+audio-samplerate=96000
+audio-channels=stereo
+audio-normalize-downmix=yes
+audio-buffer=0.3
+volume-max=100
+volume=80
+
+# Tăng cường hiệu suất và bộ nhớ cache
+cache=yes
+cache-secs=600
+demuxer-readahead-secs=60
+demuxer-max-bytes=2GiB  # Tối ưu dung lượng cache
+demuxer-max-back-bytes=200MiB
+network-timeout=60
+
+# Tăng tốc xử lý khi sử dụng yt-dlp/youtube-dl
+ytdl-format=(bv*[vcodec~='^((he|a)vc|h26[45])'][protocol!*=m3u8]+ba)/(bv*+ba/b)  # Ưu tiên H264
+ytdl-raw-options-append=extractor-args=youtube:player_skip=js  # Tăng tốc mở video
+script-opts=ytdl_hook-try_ytdl_first=yes,ytdl_hook-exclude="%.webm$|%.ts$|%.mp3$|%.m3u8$|%.m3u$|%.mkv$|%.mp4$|%.VOB$|%.wmv$|%.ogg$|%.mpd$|%.mov$|%.webm$|%.webp$|%.avi$|%.flv$|%.swf$|%.f4v$"
+
+# Tự động chọn track audio/subtitle theo ngôn ngữ
+track-auto-selection=yes
+alang=ja,jp,jpn,vi,vie,en,eng  # Thứ tự ưu tiên audio
+slang=vi,vie  # Thứ tự ưu tiên phụ đề
+ytdl-raw-options=write-thumbnail=,sub-lang="vi,vi-vi,en,en-en",yes-playlist=  # Tải danh sách sub
 
 # Tùy chỉnh phụ đề
+#sub-font="Droid Sans"  # Bạn có thể thay đổi nếu muốn
 sub-font-size=68
-#sub-font="Droid Sans"  # Hoặc thay bằng font yêu thích trên máy tính
-sub-color="#FFFFFF"  # Màu chữ trắng
-sub-shadow-color="#000000"  # Màu viền đen
+sub-color="#FFFFFF"
+sub-shadow-color="#000000"
 sub-shadow-offset=2
 sub-border-size=2
+#sub-pos=50
 
-# Cấu hình cache cho phát trực tuyến
-cache=yes
-cache-secs=120
-demuxer-max-bytes=2GiB  # Tăng lên 2GB tận dụng RAM cao hơn
-demuxer-max-back-bytes=200MiB
+# Tăng hiệu suất xử lý video
+gpu-max-frames=2
+swapchain-depth=2
+scale=ewa_lanczos
+scale-antiring=0.8
+dscale=mitchell
+tscale=catmull_rom  # Chuyển động mượt mà hơn cho video FPS thấp
 
-# Renderer GPU
-vo=gpu-next
-gpu-api=opengl  # Đề xuất OpenGL vì hiệu quả hơn Vulkan trên GPU Vega tích hợp
-hwdec=auto-safe  # Tự động bật giải mã phần cứng an toàn
-hwdec-interop=auto
-
-# Xử lý HDR
+# Tùy chỉnh xử lý HDR
 tone-mapping=hable
 hdr-compute-peak=yes
 gamut-clipping=yes
 target-prim=bt2020
-target-contrast=1.0  # Điều chỉnh contrast tự nhiên hơn
+target-contrast=1.0
+hdr-contrast-recovery=0.85
 
-# Tùy chỉnh scaling
-scale=ewa_lanczos
-scale-antiring=0.8  # Tăng giá trị antiring một chút cho hình ảnh mịn hơn
-dscale=mitchell  # Tùy chọn giảm nhiễu nhẹ khi scaling xuống
-
-# Giới hạn tài nguyên để cải thiện hiệu suất
-swapchain-depth=2
-gpu-max-frames=2
-
-# Xử lý video có FPS thấp
-interpolation=yes
-tscale=catmull_rom  # Mượt hơn với phương pháp Catmull-Rom
-
-# Bật dithering (nếu cần)
+# Dithering (cải thiện hiển thị màu sắc)
 temporal-dither=no
 dither-depth=8
-
-# Tối ưu âm thanh
-audio-samplerate=48000  # Giữ nguyên tần số tiêu chuẩn
-audio-channels=stereo
-audio-normalize-downmix=yes
