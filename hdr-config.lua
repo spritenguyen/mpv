@@ -1,45 +1,49 @@
-mp.register_event("file-loaded", function()
-    -- Hàm áp dụng cấu hình
-    local function apply_config(hwdec, vo, scale, dscale, tone_mapping, hdr_compute_peak, message)
-        mp.set_property("hwdec", hwdec)
-        mp.set_property("vo", vo)
-        mp.set_property("scale", scale)
-        mp.set_property("dscale", dscale)
-        if tone_mapping then
-            mp.set_property("tone-mapping", tone_mapping)
-        end
-        if hdr_compute_peak then
-            mp.set_property("hdr-compute-peak", hdr_compute_peak)
-        end
-        mp.osd_message(message, 6)
-    end
-
-    -- Nhận diện thiết bị và thông tin video
+-- Cải tiến nhận diện hệ điều hành
+local function detect_os()
     local os_name = mp.get_property("os-name", "unknown")
     local gpu_context = mp.get_property("gpu-context", "unknown")
-    local filename = mp.get_property("filename", "")
-    local hdr_format = mp.get_property("video-params/primaries", "unknown")
-    local color_space = mp.get_property("video-params/space", "unknown")
-    local hdr_peak = mp.get_property("video-params/hdr-peak", 0)
-    local codec = mp.get_property("video-codec", "unknown")
 
-    -- Kiểm tra video có HDR hay không
-    local is_hdr = (hdr_format == "bt.2020" or color_space == "hdr" or tonumber(hdr_peak) > 0 or codec:find("hevc") or filename:find("HDR") or filename:find("hdr"))
-
-    -- Cải tiến nhận diện thiết bị
-    local is_android = os_name == "android" or gpu_context:find("mediacodec")
-    
-    if is_hdr then
-        if is_android then
-            apply_config("mediacodec", "gpu", "bilinear", "mitchell", "linear", "no", "HDR Configuration Applied for Android!")
-        else
-            apply_config("auto-safe", "gpu", "ewa_lanczos", "mitchell", "hable", "yes", "HDR Configuration Applied for PC!")
-        end
-    else
-        if is_android then
-            apply_config("mediacodec", "gpu", "bilinear", "bilinear", nil, nil, "Non-HDR Configuration Applied for Android!")
-        else
-            apply_config("auto-safe", "gpu", "bilinear", "bilinear", nil, nil, "Non-HDR Configuration Applied for PC!")
-        end
+    -- Kiểm tra Android
+    if os_name == "android" or gpu_context:find("mediacodec") then
+        return "android"
     end
-end)
+
+    -- Kiểm tra Windows
+    if os_name:lower():find("windows") then
+        return "windows"
+    end
+
+    -- Kiểm tra Linux
+    if os_name:lower():find("linux") then
+        return "linux"
+    end
+
+    -- Kiểm tra macOS
+    if os_name:lower():find("darwin") then
+        return "macos"
+    end
+
+    -- Mặc định
+    return "unknown"
+end
+
+-- Sử dụng hàm detect_os
+local detected_os = detect_os()
+
+if is_hdr then
+    if detected_os == "android" then
+        apply_config("mediacodec", "gpu", "bilinear", "mitchell", "linear", "no", "HDR Configuration Applied for Android!")
+    elseif detected_os == "windows" or detected_os == "linux" or detected_os == "macos" then
+        apply_config("auto-safe", "gpu", "ewa_lanczos", "mitchell", "hable", "yes", "HDR Configuration Applied for PC!")
+    else
+        mp.osd_message("Unknown OS - Cannot Apply Configuration", 6)
+    end
+else
+    if detected_os == "android" then
+        apply_config("mediacodec", "gpu", "bilinear", "bilinear", nil, nil, "Non-HDR Configuration Applied for Android!")
+    elseif detected_os == "windows" or detected_os == "linux" or detected_os == "macos" then
+        apply_config("auto-safe", "gpu", "bilinear", "bilinear", nil, nil, "Non-HDR Configuration Applied for PC!")
+    else
+        mp.osd_message("Unknown OS - Cannot Apply Configuration", 6)
+    end
+end
