@@ -17,6 +17,11 @@ cache=yes
 cache-secs=90  # Giảm thời gian cache để tiết kiệm tài nguyên
 demuxer-max-bytes=512MiB  # Giảm dung lượng cache
 demuxer-max-back-bytes=50MiB
+--reconnect=yes
+--reconnect-streamed=yes
+--reconnect-delay=5
+ytdl-raw-options-append=extractor-args=youtube:player_skip=js  # Tăng tốc mở video
+script-opts=ytdl_hook-try_ytdl_first=yes,ytdl_hook-exclude="%.webm$|%.ts$|%.mp3$|%.m3u8$|%.m3u$|%.mkv$|%.mp4$|%.VOB$|%.wmv$|%.ogg$|%.mpd$|%.mov$|%.webm$|%.webp$|%.avi$|%.flv$|%.swf$|%.f4v$"
 
 # Renderer GPU với Vulkan API để tận dụng Snapdragon 778G
 gpu-api=vulkan
