@@ -26,14 +26,17 @@ mp.register_event("file-loaded", function()
     -- Kiểm tra video có HDR hay không
     local is_hdr = (hdr_format == "bt.2020" or color_space == "hdr" or tonumber(hdr_peak) > 0 or codec:find("hevc") or filename:find("HDR") or filename:find("hdr"))
 
+    -- Cải tiến nhận diện thiết bị
+    local is_android = os_name == "android" or gpu_context:find("mediacodec")
+    
     if is_hdr then
-        if os_name == "android" then
+        if is_android then
             apply_config("mediacodec", "gpu", "bilinear", "mitchell", "linear", "no", "HDR Configuration Applied for Android!")
         else
             apply_config("auto-safe", "gpu", "ewa_lanczos", "mitchell", "hable", "yes", "HDR Configuration Applied for PC!")
         end
     else
-        if os_name == "android" then
+        if is_android then
             apply_config("mediacodec", "gpu", "bilinear", "bilinear", nil, nil, "Non-HDR Configuration Applied for Android!")
         else
             apply_config("auto-safe", "gpu", "bilinear", "bilinear", nil, nil, "Non-HDR Configuration Applied for PC!")
