@@ -1,6 +1,7 @@
 # Kích hoạt script autoload cho phụ đề tự động
 script=/storage/emulated/0/Android/media/is.xyz.mpv/scripts/autoload.lua
 script=/storage/emulated/0/Android/media/is.xyz.mpv/scripts/auto-reload.lua
+script=/storage/emulated/0/Android/media/is.xyz.mpv/scripts/hdr-config.lua
 
 # Tùy chọn dành cho youtube-dl (hoặc yt-dlp) để tải nhanh
 ytdl-raw-options=external-downloader-args=["-x", "16", "-s", "16", "-k", "1M"]
@@ -9,7 +10,7 @@ keep-open=yes  # Giữ cửa sổ MPV sau khi video kết thúc
 
 # Tùy chỉnh phụ đề
 sub-font-size=64  # Giảm kích thước font để giảm tải GPU
-sub-font="Droid Sans"  # Hoặc bất kỳ font nào bạn đã cài đặt
+#sub-font="Droid Sans"  # Hoặc bất kỳ font nào bạn đã cài đặt
 sub-color="#FFFFFF"  # Màu chữ trắng
 sub-shadow-color="#000000"  # Màu viền đen để tăng độ rõ ràng
 sub-shadow-offset=2
