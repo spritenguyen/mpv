@@ -1,7 +1,7 @@
 # Kích hoạt script autoload cho phụ đề tự động
-script=/storage/emulated/0/Android/media/is.xyz.mpv/scripts/autoload.lua
-script=/storage/emulated/0/Android/media/is.xyz.mpv/scripts/auto-reload.lua
-script=/storage/emulated/0/Android/media/is.xyz.mpv/scripts/hdr-config.lua
+script=/storage/emulated/0/Android/media/is.xyz.mpv.ytdl/scripts/autoload.lua
+script=/storage/emulated/0/Android/media/is.xyz.mpv.ytdl/scripts/auto-reload.lua
+script=/storage/emulated/0/Android/media/is.xyz.mpv.ytdl/scripts/hdr-config.lua
 
 # Tùy chọn dành cho youtube-dl (hoặc yt-dlp) để tải nhanh
 ytdl-raw-options=external-downloader-args=["-x", "16", "-s", "16", "-k", "1M"]
