@@ -33,6 +33,7 @@ vo=gpu-next
 hwdec=mediacodec
 hwdec-interop=auto
 
+##################################################################################
 # Xử lý HDR tối ưu cho HDR10+
 tone-mapping=hable
 hdr-compute-peak=yes
