@@ -2,7 +2,7 @@ mp.register_event("file-loaded", function()
     local is_live = mp.get_property("stream-path", ""):find("http") ~= nil -- Phát hiện luồng trực tiếp
     if is_live then
         -- Cấu hình tối ưu cho luồng trực tiếp
-        mp.set_property("hwdec", "auto-safe")
+        mp.set_property("hwdec", "auto")
         mp.set_property("vo", "gpu")
         mp.set_property("scale", "bilinear")
         mp.set_property("interpolation", "no")
@@ -15,7 +15,7 @@ mp.register_event("file-loaded", function()
             local bitrate = (file_size * 8) / (duration * 1000) -- Tính bitrate (kbps)
             if bitrate > 3000 then
                 -- Cấu hình cho bitrate cao
-                mp.set_property("hwdec", "auto-safe")
+                mp.set_property("hwdec", "auto")
                 mp.set_property("vo", "gpu-next")
                 mp.set_property("scale", "ewa_lanczos")
                 mp.set_property("tone-mapping", "reinhard")
@@ -24,7 +24,7 @@ mp.register_event("file-loaded", function()
                 mp.osd_message("Cấu hình 'bitrate cao' đã được áp dụng", 5)
             else
                 -- Cấu hình cho bitrate thấp/chuẩn
-                mp.set_property("hwdec", "auto-safe")
+                mp.set_property("hwdec", "auto")
                 mp.set_property("vo", "gpu")
                 mp.set_property("scale", "bilinear")
                 mp.set_property("interpolation", "no")
