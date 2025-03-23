@@ -24,7 +24,7 @@ mp.register_event("file-loaded", function()
                 mp.set_property("vo", "gpu")
                 mp.set_property("scale", "bilinear")
                 mp.set_property("interpolation", "no")
-                mp.osd_message("Cấu hình Non-HDR đã được áp dụng", 5)
+                mp.osd_message("Cấu hình 'Normal' đã được áp dụng", 5)
             end
         else
             mp.osd_message("Không thể tính toán bitrate!", 5)
