@@ -1,7 +1,8 @@
 mp.register_event("file-loaded", function()
     local is_live = mp.get_property("stream-path", ""):find("http") ~= nil -- Phát hiện luồng trực tiếp
     if is_live then
-        mp.set_property("hwdec", "auto-safe")
+        -- Cấu hình tối ưu cho luồng trực tiếp
+        mp.set_property("hwdec", "vulkan")
         mp.set_property("vo", "gpu")
         mp.set_property("scale", "bilinear")
         mp.set_property("interpolation", "no")
@@ -13,14 +14,17 @@ mp.register_event("file-loaded", function()
         if file_size > 0 and duration > 0 then
             local bitrate = (file_size * 8) / (duration * 1000) -- Tính bitrate (kbps)
             if bitrate > 3000 then
-                mp.set_property("hwdec", "auto-safe")
+                -- Cấu hình cho bitrate cao
+                mp.set_property("hwdec", "vulkan")
                 mp.set_property("vo", "gpu-next")
-                mp.set_property("scale", "bicubic")
-                mp.set_property("tone-mapping", "mobius")
-                mp.set_property("hdr-compute-peak", "no")
+                mp.set_property("scale", "ewa_lanczos")
+                mp.set_property("tone-mapping", "reinhard")
+                mp.set_property("hdr-compute-peak", "yes") -- Hỗ trợ HDR
+                mp.set_property("hdr-tone-mapping", "hdr2sdr")
                 mp.osd_message("Cấu hình 'bitrate cao' đã được áp dụng", 5)
             else
-                mp.set_property("hwdec", "auto-safe")
+                -- Cấu hình cho bitrate thấp/chuẩn
+                mp.set_property("hwdec", "vulkan")
                 mp.set_property("vo", "gpu")
                 mp.set_property("scale", "bilinear")
                 mp.set_property("interpolation", "no")
