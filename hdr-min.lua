@@ -6,14 +6,14 @@ mp.register_event("file-loaded", function()
         local bitrate = (file_size * 8) / (duration * 1000) -- Chuyển đổi từ byte sang kbps
         if bitrate > 3000 then
             mp.set_property("hwdec", "auto-safe")
-            -- mp.set_property("vo", "gpu")
+            mp.set_property("vo", "gpu-next")
             mp.set_property("scale", "bicubic")
             mp.set_property("tone-mapping", "mobius")
             mp.set_property("hdr-compute-peak", "no")
             mp.osd_message("Cấu hình 'bitrate cao' đã được áp dụng", 5)
         else
             mp.set_property("hwdec", "auto-safe")
-            -- mp.set_property("vo", "gpu")
+            mp.set_property("vo", "gpu")
             mp.set_property("scale", "bilinear")
             mp.set_property("interpolation", "no")
             mp.osd_message("Cấu hình Non-HDR đã được áp dụng", 5)
